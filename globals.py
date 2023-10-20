@@ -1,18 +1,16 @@
 from enum import Enum
 
 class Globals:
-  # TODO: documentation
+  """
+    Class to store global variables
+  """
 
   class SimStates(Enum):
-    # TODO: documentation
+    """
+      Enum to store classification state between files
+    """
 
     DIFFERENT = 0
     SIMILAR = 1
     IDENTICAL = 2
-
-  class RootDir(Enum):
-    # TODO: documentation
-
-    FIRST_DIR = 0
-    SECOND_DIR = 1
   

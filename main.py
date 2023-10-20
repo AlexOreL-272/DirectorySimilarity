@@ -23,7 +23,6 @@ class DirectorySimilarity:
     # minimal similarity percentage
     self.similarity_percentage = sim_percentage
 
-
   @staticmethod
   def __levenshtein_distance(lhs_string, rhs_string):
     """
@@ -67,7 +66,6 @@ class DirectorySimilarity:
     # result lays in lower right element of matrix
     return matrix[-1][-1]
 
-
   def __check_sizes(self, lhs_file_path: str, rhs_file_path: str) -> bool:
     """
       Checks if ratio of file sizes is not less than given percentage.
@@ -84,7 +82,6 @@ class DirectorySimilarity:
     max_size = max(lhs_stat.st_size, rhs_stat.st_size)
 
     return (min_size / max_size) * 100 >= self.similarity_percentage
-
 
   @staticmethod
   def __check_links(lhs_file_path: str, rhs_file_path: str) -> bool:
@@ -103,7 +100,6 @@ class DirectorySimilarity:
     # if file inodes and they are located on the same device, they are identical
     return stat_1.st_ino == stat_2.st_ino and stat_1.st_dev == stat_2.st_dev
 
- 
   def __check_files(self, lhs_file_path: str, rhs_file_path: str) -> tuple:
     """
       Classifies two files whether they are identical, similar or different.
@@ -155,7 +151,6 @@ class DirectorySimilarity:
     # if similarity percentage is less than given, then files are treated as different
     return (Globals.SimStates.DIFFERENT, 0)
 
-
   def __print_identical_files(self, identical_files):
     """
       Prints identical files from both directories
@@ -172,7 +167,6 @@ class DirectorySimilarity:
         if (key, related_file) not in printed_files:
           print(f"{self.first_dir_path}/{key} and {self.second_dir_path}/{related_file} are 100% identical")
           printed_files.append((related_file, key))
-
 
   def __print_similar_files(self, similar_files):
     """
@@ -192,7 +186,6 @@ class DirectorySimilarity:
           related_file, 
           similarity_coeff)
         )
-
 
   def __print_unique_files(
       self, different_files_in_first_dir: dict, 
@@ -220,7 +213,6 @@ class DirectorySimilarity:
       # if file from first directory is different from every other file in second directory
       if value == files_amt_in_second_dir:
           print(f"File {self.first_dir_path}/{key} is unique")
-
 
   def check_dirs(self):
     """
@@ -314,12 +306,11 @@ class DirectorySimilarity:
       files_amt_in_second_dir
     )
           
-    
-
 
 if __name__ == "__main__":
-  first_dir = input("Enter first directory name: ")
-  second_dir = input("Enter second directory name: ")
+  # input both directories and delete leading and trailing spaces
+  first_dir = input("Enter first directory name: ").strip()
+  second_dir = input("Enter second directory name: ").strip()
   min_similarity_percentage = float(input("Enter minimal similarity percentage to treat files as similar: "))
 
   dir_checker = DirectorySimilarity(first_dir, second_dir, min_similarity_percentage)
